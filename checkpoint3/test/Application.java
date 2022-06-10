@@ -1,11 +1,12 @@
-package Devoteam.Checkpoints.checkpoint2.test;
+package Devoteam.Checkpoints.checkpoint3.test;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Devoteam.Checkpoints.checkpoint2.service.VehicleService;
-import Devoteam.Checkpoints.checkpoint2.domain.Automaker;
-import Devoteam.Checkpoints.checkpoint2.domain.Vehicle;
+import Devoteam.Checkpoints.checkpoint3.service.VehicleService;
+import Devoteam.Checkpoints.checkpoint3.domain.Automaker;
+import Devoteam.Checkpoints.checkpoint3.domain.Car;
+import Devoteam.Checkpoints.checkpoint3.domain.Vehicle;
 
 public class Application {
 
@@ -66,27 +67,28 @@ public class Application {
           break;
 
         case 4:
-        System.out.println(" \n Choose what vehicle to update, ");
-        System.out.println("Select a vehicle model to update:");
-        String vehicleModelInput = input.next();
-        Boolean updateResponse = vehicleService.updateVehicleModel(vehicleModelInput);
-        if (updateResponse) {
-        System.out.println(" \n Choose automaker name: ");
-        String newAutoMakerName = input.next();
-        System.out.println(" \n Choose model: ");
-        String newModel = input.next();
-        System.out.println(" \n Choose color: ");
-        String newColor = input.next();
-        System.out.println(" \n Choose year: ");
-        int newYear = input.nextInt();
-        Automaker newVehicleAutomaker = new Automaker(newAutoMakerName);
-        Vehicle newVehicle = new Vehicle(newVehicleAutomaker, newModel, newColor, newYear);
-        Vehicle oldVehicle = vehicleService.searchByModel(vehicleModelInput);
-        vehicleService.updateVehicle(oldVehicle, newVehicle); 
-        } else {
-          System.out.println("Something went wrong, vehicle was not updated.");
-        }
-        break;
+          System.out.println(" \n Choose what vehicle to update, ");
+          System.out.println("Select a vehicle model to update:");
+          String vehicleModelInput = input.next();
+          Boolean updateResponse = vehicleService.updateVehicleModel(vehicleModelInput);
+          // Verwerken dat als er geen model binnenkomt, dat er een error komt
+          if (updateResponse) {
+          System.out.println(" \n Choose automaker name: ");
+          String newAutoMakerName = input.next();
+          System.out.println(" \n Choose model: ");
+          String newModel = input.next();
+          System.out.println(" \n Choose color: ");
+          String newColor = input.next();
+          System.out.println(" \n Choose year: ");
+          int newYear = input.nextInt();
+          Automaker newVehicleAutomaker = new Automaker(newAutoMakerName);
+          Vehicle newVehicle = new Car(newVehicleAutomaker, newModel, newColor, newYear);
+          Vehicle oldVehicle = vehicleService.searchByModel(vehicleModelInput);
+          vehicleService.updateVehicle(oldVehicle, newVehicle); 
+          } else {
+            System.out.println("Something went wrong, vehicle was not updated.");
+          }
+          break;
 
         case 5:
           System.out.println(" \n Choose what vehicle to delete, ");

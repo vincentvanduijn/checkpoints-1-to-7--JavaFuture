@@ -1,10 +1,11 @@
-package Devoteam.Checkpoints.checkpoint2.service;
+package Devoteam.Checkpoints.checkpoint3.service;
 
 import java.util.ArrayList;
 
-import Devoteam.Checkpoints.checkpoint2.domain.Automaker;
-import Devoteam.Checkpoints.checkpoint2.domain.Vehicle;
-import Devoteam.Checkpoints.checkpoint2.repository.VehicleRepository;
+import Devoteam.Checkpoints.checkpoint3.domain.Automaker;
+import Devoteam.Checkpoints.checkpoint3.domain.Car;
+import Devoteam.Checkpoints.checkpoint3.domain.Vehicle;
+import Devoteam.Checkpoints.checkpoint3.repository.VehicleRepository;
 
 public class VehicleService {
     private VehicleRepository vehicleRepository = new VehicleRepository();
@@ -33,7 +34,7 @@ public class VehicleService {
 
     public Vehicle addVehicle(String automakerName, String model, String color, int year) {
         Automaker automaker1 = new Automaker(automakerName);
-        Vehicle addedVehicle = new Vehicle(automaker1, model, color, year);
+        Vehicle addedVehicle = new Car(automaker1, model, color, year);
         ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
         vehicleList = vehicleRepository.getVehicleArray();
 
@@ -64,7 +65,6 @@ public class VehicleService {
             System.out.println("Update confirmed");
         }
     }
-    
     public Boolean updateVehicleModel(String model) {
         Vehicle vehicleResponse = searchByModel(model);
         if (vehicleResponse != null) {
@@ -77,6 +77,7 @@ public class VehicleService {
             return false;
         }
     }
+
 
     public Boolean deleteVehicleByModel(String model) {
         Vehicle vehicleResponse = searchByModel(model);
