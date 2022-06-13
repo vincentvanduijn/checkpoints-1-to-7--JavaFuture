@@ -6,6 +6,7 @@ public abstract class Vehicle {
   private String color;
   private int year;
 
+
   public Vehicle(Automaker automaker, String model, String color, int year) {
     this.setAutomaker(automaker);
     this.setModel(model);
@@ -62,6 +63,7 @@ public abstract class Vehicle {
     System.out.println(this.model);
     System.out.println(this.color);
     System.out.println(this.year);
+    System.out.println(this.InnerVehicle);
 
   }
 

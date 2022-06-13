@@ -55,6 +55,8 @@ public class VehicleService {
     public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         int vehicleIndex = vehicleList.indexOf(oldVehicle);
+        // Nog toevoegen dat als er meer dan 1 gelijk model type is dat je moet kiezen dus de plek in de index
+        // If als array groter is dan 1
         if (oldVehicle.getModel().equals(newVehicle.getModel())
                 && oldVehicle.getAutomaker().getName().equals(newVehicle.getAutomaker().getName())
                 && oldVehicle.getColor().equals(newVehicle.getColor())
@@ -91,5 +93,6 @@ public class VehicleService {
             return false;
         }
     }
-
+ // help functie die checkt welke positie in de array je wilt hebben bij een dubbele model
+ // de gekozen ID/array plek returnen, deze functie ook voor delete gebruiken
 }

@@ -71,7 +71,6 @@ public class Application {
           System.out.println("Select a vehicle model to update:");
           String vehicleModelInput = input.next();
           Boolean updateResponse = vehicleService.updateVehicleModel(vehicleModelInput);
-          // Verwerken dat als er geen model binnenkomt, dat er een error komt
           if (updateResponse) {
           System.out.println(" \n Choose automaker name: ");
           String newAutoMakerName = input.next();
