@@ -1,14 +1,14 @@
 package Devoteam.Checkpoints.checkpoint3.domain;
 
-public class Car extends Vehicle {
+public class Motorcycle extends Vehicle {
 
-    public Car(Automaker automaker, String model, String color, int year) {
+    public Motorcycle(Automaker automaker, String model, String color, int year) {
         super(automaker, model, color, year);
     }
 
     @Override
     public VehicleTypeEnum getVehicleType() {
-        return VehicleTypeEnum.CAR;
+        return VehicleTypeEnum.MOTORCYCLE;
     }
 
 

@@ -1,11 +1,10 @@
 package Devoteam.Checkpoints.checkpoint3.domain;
 
-public abstract class Vehicle {
+public abstract class Vehicle implements VehicleInterface {
   private Automaker automaker;
   private String model;
   private String color;
   private int year;
-
 
   public Vehicle(Automaker automaker, String model, String color, int year) {
     this.setAutomaker(automaker);
@@ -13,7 +12,6 @@ public abstract class Vehicle {
     this.setColor(color);
     this.setYear(year);
   }
-
 
   public Automaker getAutomaker() {
     return this.automaker;
@@ -58,12 +56,15 @@ public abstract class Vehicle {
         "}";
   }
 
+  
+
   public void prettyPrint() {
     System.out.println(this.automaker);
     System.out.println(this.model);
     System.out.println(this.color);
     System.out.println(this.year);
-    System.out.println(this.InnerVehicle);
+    //System.out.println(VehicleInterface); <- navragen Jens
+    
 
   }
 
