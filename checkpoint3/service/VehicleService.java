@@ -24,10 +24,7 @@ public class VehicleService {
 
     public Vehicle searchByModel(String autoModel) {
 
-        // System.out.println("Before loop " + autoModel);
         for (Vehicle item : vehicleRepository.getVehicleArray()) {
-            //System.out.println("In loop automodel (usrt input) " + autoModel);
-            //System.out.println("In loop item model " +item.getModel());
             if (item.getModel().equals(autoModel)) {
                 return item;
             }
@@ -35,12 +32,32 @@ public class VehicleService {
         return null;
     }
 
+    // public Vehicle searchByColor(String color) {
+
+    //     for (Vehicle item : vehicleRepository.getVehicleArray()) {
+    //         if (item.getColor().equals(color)) {
+    //             return item;
+    //         }
+    //     }
+    //     return null;
+    // }
+
+    // public Vehicle searchByYear(int year) {
+
+    //     for (Vehicle item : vehicleRepository.getVehicleArray()) {
+    //         if (item.getYear() == year) {
+    //             return item;
+    //         }
+    //     }
+    //     return null;
+    // }
+
     public Vehicle addVehicle(String automakerName, String model, String color, int year, String vehicleType) {
         Automaker automaker1 = new Automaker(automakerName);
         boolean vehicleTypeCheck = vehicleTypeExists(vehicleType);
         if (!vehicleTypeCheck) {
             return null;
-        } 
+        }
 
         Vehicle addedVehicle = VehicleTypeEnum.valueOf(vehicleType).createNewVehicle(automaker1, model, color, year);
         ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
@@ -65,9 +82,6 @@ public class VehicleService {
     public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         int vehicleIndex = vehicleList.indexOf(oldVehicle);
-        // Nog toevoegen dat als er meer dan 1 gelijk model type is dat je moet kiezen
-        // dus de plek in de index
-        // If als array groter is dan 1
         if (oldVehicle.getModel().equals(newVehicle.getModel())
                 && oldVehicle.getVehicleType().equals(newVehicle.getVehicleType())
                 && oldVehicle.getAutomaker().getName().equals(newVehicle.getAutomaker().getName())
@@ -81,6 +95,7 @@ public class VehicleService {
     }
 
     // updateVehicleModel ipv boolean returned het nu een int (de vehicleIndex)
+    // TO DO: updateVehicleModel ombouwen naar updateVehicleModelColorYear, checken op de 3 waardes
     public int updateVehicleModel(String model) {
         Vehicle vehicleResponse = searchByModel(model);
 
@@ -95,6 +110,33 @@ public class VehicleService {
             return -1;
         }
     }
+
+    // public int updateVehicleColor(String color) {
+    //     Vehicle vehicleResponse = searchByColor(color);
+    //     System.out.println(vehicleResponse);
+
+    //     if (vehicleResponse != null) {
+    //         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+    //         int vehicleIndex = vehicleList.indexOf(vehicleResponse);
+    //         return vehicleIndex;
+    //     } else {
+    //         System.out.println("No vehicle with that color was found.");
+    //         return -1;
+    //     }
+
+    // }
+    // public int updateVehicleYear(int year) {
+    //     Vehicle vehicleResponse = searchByYear(year);
+
+    //     if (vehicleResponse != null) {
+    //         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+    //         int vehicleIndex = vehicleList.indexOf(vehicleResponse);
+    //         return vehicleIndex;
+    //     } else {
+    //         System.out.println("No vehicle with that year was found.");
+    //         return -1;
+    //     }
+    // }
 
     public Boolean deleteVehicleByModel(String model) {
         Vehicle vehicleResponse = searchByModel(model);
@@ -127,7 +169,5 @@ public class VehicleService {
     public void deleteVehicleByIndex(int vehicleIndex) {
         vehicleRepository.getVehicleArray().remove(vehicleIndex);
     }
-    // help functie die checkt welke positie in de array je wilt hebben bij een
-    // dubbele model
-    // de gekozen ID/array plek returnen, deze functie ook voor delete gebruiken
+
 }

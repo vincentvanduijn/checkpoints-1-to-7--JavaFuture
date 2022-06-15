@@ -9,17 +9,18 @@ import Devoteam.Checkpoints.checkpoint3.domain.VehicleTypeEnum;
 import Devoteam.Checkpoints.checkpoint3.service.VehicleService;
 
 // --------15-6-2022------------
-// Aangepast: laatste 2 punten van checkpoint 3 (zie o.a. VehicleTypeEnum)
+// Aangepast: laatste 2 punten van checkpoint 3 (zie o.a. VehicleTypeEnum), checkpoint 3 is klaar
 // Aangepast: comments neer zetten bij changes ANDERS VERGEET JE WEER WAT JE GEDAAN HEBT!!!!
 // Aangepast: in de vehicleservice bij de "dulpicate entry code" de lines voor vehicletype toegevoegd
 // Aangepast: alle verouderde imports verwijdert
 // BUGFIX: dat "old vehicle" een null waarde terug gaf
 // BUGFIX: dat met de nieuwe code vehicleIndex al was verwijderd voordat een nieuwe index was geplaatst
-// hierdoor kon het model type (bijv Malibu) niet gevonden worden.
+// hierdoor kon het model type (bijv. Malibu) niet gevonden worden.
 // TO DO: Bij het updaten van een Vehicle is de positie van newVehicle nu hetzelfde als de positie van oldVehicle (yay!), 
 // echter moet ik nog zorgen dat het keuze menu uitgebreider gaat worden (niet alleen zoeken bij model?).
 // Nu is nog steeds het eerste model dat gevonden wordt de gene die geupdate/ delete gaat worden. 
-// TO DO: Code nalopen op "dead code".
+// TO DO: Structuur van mappen met Jens aanpassen (Path)
+
 
 public class Application {
 
@@ -83,10 +84,17 @@ public class Application {
         case 4:
           System.out.println(" \n Choose what vehicle to update, ");
           System.out.println("Select a vehicle model to update:");
-          String vehicleModelInput = input.next();
-          //updatedVehicleModel is nu updateResponseIndex en een int ipv een boolean
-          int updateResponseIndex = vehicleService.updateVehicleModel(vehicleModelInput);
-          // ipv updatedVehicleModel te checken op null checken of updateResponseIndex hoger dan 0 is (false is nu -1)
+          String vehicleModelInputModel = input.next();
+          System.out.println(" \n Select the corresponding color for the chosen model:");
+          String vehicleModelInputColor = input.next();
+          System.out.println(" \n Select the corresponding year for the chosen model:");
+          Integer vehicleModelInputYear = input.nextInt();
+          // updatedVehicleModel is nu updateResponseIndex en een int ipv een boolean
+          int updateResponseIndex = vehicleService.updateVehicleModel(vehicleModelInputModel);
+          // TO DO: de method updateVehiclemodel ombouwen naar updateVehicleModelColorYear in 1 method
+          // ipv updatedVehicleModel te checken op null checken of updateResponseIndex
+          // hoger dan 0 is (false is nu -1)
+          
           if (updateResponseIndex > 0) {
             System.out.println(" \n Choose automaker name: ");
             String newAutoMakerName = input.next();
@@ -103,7 +111,7 @@ public class Application {
             if (vehicleTypeCheck) {
               Vehicle newVehicle = VehicleTypeEnum.valueOf(newVehicleType).createNewVehicle(newVehicleAutomaker,
                   newModel, newColor, newYear);
-              Vehicle oldVehicle = vehicleService.searchByModel(vehicleModelInput);
+              Vehicle oldVehicle = vehicleService.searchByModel(vehicleModelInputModel);
               vehicleService.updateVehicle(oldVehicle, newVehicle);
             } else {
               System.out.println("Something went wrong, vehicle was not updated.");
@@ -113,7 +121,6 @@ public class Application {
             System.out.println("No vehicle found to update.");
           }
           break;
-
 
         case 5:
           System.out.println(" \n Choose what vehicle to delete, ");

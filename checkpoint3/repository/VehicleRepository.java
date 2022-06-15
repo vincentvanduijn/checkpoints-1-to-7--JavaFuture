@@ -7,7 +7,6 @@ import Devoteam.Checkpoints.checkpoint3.domain.Car;
 import Devoteam.Checkpoints.checkpoint3.domain.Vehicle;
 import Devoteam.Checkpoints.checkpoint3.domain.VehicleTypeEnum;
 
-
 public class VehicleRepository {
     ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
 
@@ -82,6 +81,5 @@ public class VehicleRepository {
         this.vehicleArray.add(vehicle53);
 
     }
-
 
 }

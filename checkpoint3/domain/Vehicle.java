@@ -71,8 +71,7 @@ public abstract class Vehicle implements VehicleInterface {
     System.out.println(this.model);
     System.out.println(this.color);
     System.out.println(this.year);
-    System.out.println(this.vehicleType); // this.vehicleType);
-
+    System.out.println(this.vehicleType);
   }
 
 }

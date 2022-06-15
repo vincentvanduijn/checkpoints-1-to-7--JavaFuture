@@ -6,9 +6,11 @@ public class Others extends Vehicle {
         super(automaker, model, color, year, vehicleType);
     }
 
-    @Override
-    public VehicleTypeEnum getVehicleType() {
-        return VehicleTypeEnum.OTHERS;
-    }
-
 }
+
+//     @Override
+//     public VehicleTypeEnum getVehicleType() {
+//         return VehicleTypeEnum.OTHERS;
+//     }
+
+// }
