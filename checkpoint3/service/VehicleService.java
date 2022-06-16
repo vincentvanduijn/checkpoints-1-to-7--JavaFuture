@@ -32,25 +32,43 @@ public class VehicleService {
         return null;
     }
 
-    // public Vehicle searchByColor(String color) {
+    public ArrayList<Vehicle> searchByModelFilter(String autoModel, ArrayList<Vehicle> dataset) {
+        ArrayList<Vehicle> filteredVehicleList = new ArrayList<Vehicle>();
 
-    //     for (Vehicle item : vehicleRepository.getVehicleArray()) {
-    //         if (item.getColor().equals(color)) {
-    //             return item;
-    //         }
-    //     }
-    //     return null;
-    // }
+        for (Vehicle currentItem : dataset) {
+            if (currentItem.getModel().equals(autoModel)) {
+                filteredVehicleList.add(currentItem);
+            } 
 
-    // public Vehicle searchByYear(int year) {
+        }
 
-    //     for (Vehicle item : vehicleRepository.getVehicleArray()) {
-    //         if (item.getYear() == year) {
-    //             return item;
-    //         }
-    //     }
-    //     return null;
-    // }
+        return filteredVehicleList;
+
+    }
+
+    public ArrayList<Vehicle> searchByColorFilter(String color, ArrayList<Vehicle> dataset) {
+        ArrayList<Vehicle> filteredVehicleList = new ArrayList<Vehicle>();
+
+        for (Vehicle currentItem : dataset) {
+            if (currentItem.getColor().equals(color)) {
+                filteredVehicleList.add(currentItem);
+            } 
+
+        }
+
+        return filteredVehicleList;
+    }
+
+    public ArrayList<Vehicle> searchByYearFilter(int year, ArrayList<Vehicle> dataset) {
+        ArrayList<Vehicle> filteredVehicleList = new ArrayList<Vehicle>();
+
+        for (Vehicle currentItem : dataset) {
+            if (currentItem.getYear() == year) {
+                filteredVehicleList.add(currentItem);
+            }
+        }
+        return filteredVehicleList;
+    }
 
     public Vehicle addVehicle(String automakerName, String model, String color, int year, String vehicleType) {
         Automaker automaker1 = new Automaker(automakerName);
@@ -95,14 +113,17 @@ public class VehicleService {
     }
 
     // updateVehicleModel ipv boolean returned het nu een int (de vehicleIndex)
-    // TO DO: updateVehicleModel ombouwen naar updateVehicleModelColorYear, checken op de 3 waardes
+    // TO DO: updateVehicleModel ombouwen naar updateVehicleModelColorYear, checken
+    // op de 3 waardes
     public int updateVehicleModel(String model) {
-        Vehicle vehicleResponse = searchByModel(model);
+        ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+        ArrayList<Vehicle> vehicleResponse = searchByModelFilter(model, vehicleList);
 
         if (vehicleResponse != null) {
-            ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+            // ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
             int vehicleIndex = vehicleList.indexOf(vehicleResponse);
-            // de vehicleList.remove(vehicleIndex) weggehaald en vervangen door de vehicleIndex
+            // de vehicleList.remove(vehicleIndex) weggehaald en vervangen door de
+            // vehicleIndex
             return vehicleIndex;
         } else {
             // -1 bestaat niet in de array dus returnen -1 ipv false
@@ -112,43 +133,50 @@ public class VehicleService {
     }
 
     // public int updateVehicleColor(String color) {
-    //     Vehicle vehicleResponse = searchByColor(color);
-    //     System.out.println(vehicleResponse);
+    // Vehicle vehicleResponse = searchByColor(color);
+    // System.out.println(vehicleResponse);
 
-    //     if (vehicleResponse != null) {
-    //         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
-    //         int vehicleIndex = vehicleList.indexOf(vehicleResponse);
-    //         return vehicleIndex;
-    //     } else {
-    //         System.out.println("No vehicle with that color was found.");
-    //         return -1;
-    //     }
+    // if (vehicleResponse != null) {
+    // ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+    // int vehicleIndex = vehicleList.indexOf(vehicleResponse);
+    // return vehicleIndex;
+    // } else {
+    // System.out.println("No vehicle with that color was found.");
+    // return -1;
+    // }
 
     // }
     // public int updateVehicleYear(int year) {
-    //     Vehicle vehicleResponse = searchByYear(year);
+    // Vehicle vehicleResponse = searchByYear(year);
 
-    //     if (vehicleResponse != null) {
-    //         ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
-    //         int vehicleIndex = vehicleList.indexOf(vehicleResponse);
-    //         return vehicleIndex;
-    //     } else {
-    //         System.out.println("No vehicle with that year was found.");
-    //         return -1;
-    //     }
+    // if (vehicleResponse != null) {
+    // ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+    // int vehicleIndex = vehicleList.indexOf(vehicleResponse);
+    // return vehicleIndex;
+    // } else {
+    // System.out.println("No vehicle with that year was found.");
+    // return -1;
+    // }
     // }
 
     public Boolean deleteVehicleByModel(String model) {
-        Vehicle vehicleResponse = searchByModel(model);
-        if (vehicleResponse != null) {
-            ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
-            int vehicleIndex = vehicleList.indexOf(vehicleResponse);
-            vehicleList.remove(vehicleIndex);
-            return true;
-        } else {
-            System.out.println("No vehicle with that model was found.");
-            return false;
+        ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+        ArrayList<Vehicle> vehiclesFilteredByModel = searchByModelFilter(model, vehicleList);
+
+        if (vehiclesFilteredByModel.size() > 1) {
+            
         }
+
+        // if (vehicleResponse != null) {
+        //     ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+        //     System.out.println(vehicleList);
+        //     int vehicleIndex = vehicleList.indexOf(vehicleResponse);
+        //     vehicleList.remove(vehicleIndex);
+        //     return true;
+        // } else {
+        //     System.out.println("No vehicle with that model was found.");
+        //     return false;
+        // }
     }
 
     public boolean vehicleTypeExists(String userVehicleType) {

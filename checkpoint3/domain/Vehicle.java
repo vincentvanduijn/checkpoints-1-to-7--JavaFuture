@@ -1,11 +1,14 @@
 package Devoteam.Checkpoints.checkpoint3.domain;
 
+import java.time.LocalDateTime;
+
 public abstract class Vehicle implements VehicleInterface {
   private Automaker automaker;
   private String model;
   private String color;
   private int year;
   private VehicleTypeEnum vehicleType;
+  private LocalDateTime createdAt;
 
   public Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
     this.setAutomaker(automaker);
@@ -72,6 +75,7 @@ public abstract class Vehicle implements VehicleInterface {
     System.out.println(this.color);
     System.out.println(this.year);
     System.out.println(this.vehicleType);
+    System.out.println(this.createdAt);
   }
 
 }
