@@ -9,3 +9,4 @@
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
+<!--JENS: Niet nodig na package refactor; we gaan POM.xml gebruiken, dat is de standaard bij Spring (dat we later gebruiken in de cursus)-->

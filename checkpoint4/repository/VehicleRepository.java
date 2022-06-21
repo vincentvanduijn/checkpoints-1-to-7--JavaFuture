@@ -23,11 +23,13 @@ public class VehicleRepository {
     public void setVehicleArray(ArrayList<Vehicle> vehicleArray) {
         this.vehicleArray = vehicleArray;
     }
-
+//JENS: deze functie uit je repository halen een in een helper functie gooien? in ..main.java.nl.devoteam.futures.checkpoint4.util.randomizer.java
     public String randomiseCreatedAt() {
         long ms;
         Random rnd;
         rnd = new Random();
+        //JENS: Er is ongetijfeld een handigere manier (https://www.baeldung.com/java-random-dates), maar als dit werkt is het cool
+        //Een andere developer zou later nooit meer weten wat deze nummers betekenen
         ms = 946771200000L + (Math.abs(rnd.nextLong()) % (10L * 365 * 24 * 60 * 60 * 1000));
         return new Date(ms).toString();
     }

@@ -6,9 +6,9 @@ import Devoteam.Checkpoints.checkpoint4.domain.VehicleTypeEnum;
 import Devoteam.Checkpoints.checkpoint4.repository.VehicleRepository;
 
 import java.util.ArrayList;
-
+//JENS: Install plugin SonarLint (https://plugins.jetbrains.com/plugin/7973-sonarlint) laat suggesties zien met basis regels
 public class VehicleService {
-    private static VehicleRepository vehicleRepository = new VehicleRepository();
+    private static final VehicleRepository vehicleRepository = new VehicleRepository();
 
     public ArrayList<Vehicle> searchByAutomaker(String autoMaker) {
         ArrayList<Vehicle> newArray = new ArrayList<Vehicle>();
@@ -111,7 +111,7 @@ public class VehicleService {
             System.out.println("Update confirmed");
         }
     }
-
+    //JENS geen comments!
     // updateVehicleModel ipv boolean returned het nu een int (de vehicleIndex)
     // TO DO: updateVehicleModel ombouwen naar updateVehicleModelColorYear, checken
     // op de 3 waardes
@@ -130,8 +130,9 @@ public class VehicleService {
             System.out.println("No vehicle with that model was found.");
             return -1;
         }
+//JENS waarom een int returnen en niet gewoon de nieuwe vehicleModel zelf? Wat is de vehicleIndex?
     }
-
+//JENS: code opruimen
     // public int updateVehicleColor(String color) {
     // Vehicle vehicleResponse = searchByColor(color);
     // System.out.println(vehicleResponse);
@@ -166,7 +167,7 @@ public class VehicleService {
         if (vehiclesFilteredByModel.size() > 1) {
 
         }
-
+//JENS: Opruimen
         // if (vehicleResponse != null) {
         //     ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         //     System.out.println(vehicleList);
@@ -194,7 +195,7 @@ public class VehicleService {
             return true;
         }
     }
-
+//JENS: Deze functie gebruik je nooit. Of weghalen of gebruiken
     public void deleteVehicleByIndex(int vehicleIndex) {
         vehicleRepository.getVehicleArray().remove(vehicleIndex);
     }

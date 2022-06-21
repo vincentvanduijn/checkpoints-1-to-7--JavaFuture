@@ -1,5 +1,6 @@
 package Devoteam.Checkpoints.checkpoint4.test;
 
+//JENS: Hier is je [git commit -m "Hier vertel je wat je hebt gedaan"] voor dan houdt GIT je geschidenis bij voor je
 // --------15-6-2022------------
 // Aangepast: laatste 2 punten van checkpoint 3 (zie o.a. VehicleTypeEnum), checkpoint 3 is klaar
 // Aangepast: comments neer zetten bij changes ANDERS VERGEET JE WEER WAT JE GEDAAN HEBT!!!!
@@ -21,10 +22,16 @@ package Devoteam.Checkpoints.checkpoint4.test;
 // TO DO: Checkpoint 4 verwerken + pushen op GIT
 // TEST GIT CHANGES 1
 
-
+//JENS: Dit is geen JAVA file. refactoren naar een readme.md of aantekening.txt oid. Geen class van houden!
 
 
 public class Comments {
 
 
 }
+
+//JENS: JE hebt geen testen in je TEST package. Of testen maken, of TEST package verwijderen. Heb je al UT gehad in de videos?
+//JENS: out/ folder weghalen. (gitnore? Waarschijnlijk lost de refactor dit op)
+//JENS: Readme & .gitnore file maken!
+//JENS: Vanaf nu met branches en PR werken!
+//JENS: English is the Devoteam Standaard, please switch to using english comments in your code - keep your colleagues in mind
