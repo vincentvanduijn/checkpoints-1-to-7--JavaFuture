@@ -1,0 +1,64 @@
+
+o
+java:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(ûœš
+t	java:S135ˆ"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ
+E
+java:S5411s"*Use the primitive boolean expression here.(…àÁ¤ùÿÿÿÿ
+ü
+java:S1598"àThis file "VehicleApplication.java" should be located in "Devoteam\Checkpoints\checkpoint4\test" directory, not in "C:\Users\vince\GitFolder\DevoteamProjects\vehicleApplication\src\main\java\com\devoteam\VehicleApplication".(äâÔÿÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(äâÔÿÿÿÿÿ
+h
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 30 to the 15 allowed.(Çµí‘
+Z
+java:S1854&"DRemove this useless assignment to local variable "selectedVehicles".(ûœš
+_
+java:S1854P"IRemove this useless assignment to local variable "vehicleModelInputYear".(õûãè
+e
+java:S1854N"JRemove this useless assignment to local variable "vehicleModelInputColor".(èÆÍûÿÿÿÿ
+R
+java:S1854";Remove this useless assignment to local variable "looping".(Á×¤›
+S	java:S106"9Replace this use of System.out or System.err by a logger.(áõ’Áşÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Ô¡›êùÿÿÿÿ
+N	java:S106"9Replace this use of System.out or System.err by a logger.(’·›
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¨€Š®
+N	java:S106"9Replace this use of System.out or System.err by a logger.(æßó÷
+N	java:S106"9Replace this use of System.out or System.err by a logger.(º§‡´
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ùëç
+S	java:S106"9Replace this use of System.out or System.err by a logger.(œ£€üÿÿÿÿ
+N	java:S106#"9Replace this use of System.out or System.err by a logger.(Åì€“
+S	java:S106)"9Replace this use of System.out or System.err by a logger.(¸õŠ¬ıÿÿÿÿ
+S	java:S106."9Replace this use of System.out or System.err by a logger.(Ù‹©úÿÿÿÿ
+N	java:S1063"9Replace this use of System.out or System.err by a logger.(ÇÄ˜í
+N	java:S1065"9Replace this use of System.out or System.err by a logger.(‰Œ’
+S	java:S106;"9Replace this use of System.out or System.err by a logger.(€ø·Üúÿÿÿÿ
+S	java:S106<"9Replace this use of System.out or System.err by a logger.(ÔÈøÿÿÿÿ
+S	java:S106>"9Replace this use of System.out or System.err by a logger.(ÕÍæùÿÿÿÿ
+S	java:S106@"9Replace this use of System.out or System.err by a logger.(ÜáÎ¢ùÿÿÿÿ
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(Ê÷×ú
+S	java:S106D"9Replace this use of System.out or System.err by a logger.(‚ÈÌİùÿÿÿÿ
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(ÿ•ŸÛıÿÿÿÿ
+N	java:S106K"9Replace this use of System.out or System.err by a logger.(«®ë‚
+S	java:S106M"9Replace this use of System.out or System.err by a logger.(×ƒµŠøÿÿÿÿ
+V
+java:S1481N";Remove this unused "vehicleModelInputColor" local variable.(èÆÍûÿÿÿÿ
+S	java:S106O"9Replace this use of System.out or System.err by a logger.(‘…ØÉüÿÿÿÿ
+P
+java:S1481P":Remove this unused "vehicleModelInputYear" local variable.(õûãè
+S	java:S106T"9Replace this use of System.out or System.err by a logger.(ÔÈøÿÿÿÿ
+S	java:S106V"9Replace this use of System.out or System.err by a logger.(ÕÍæùÿÿÿÿ
+S	java:S106X"9Replace this use of System.out or System.err by a logger.(ÜáÎ¢ùÿÿÿÿ
+N	java:S106Z"9Replace this use of System.out or System.err by a logger.(Ê÷×ú
+S	java:S106\"9Replace this use of System.out or System.err by a logger.(‚ÈÌİùÿÿÿÿ
+S	java:S106f"9Replace this use of System.out or System.err by a logger.(…©½÷ûÿÿÿÿ
+S	java:S106j"9Replace this use of System.out or System.err by a logger.(ˆ¬¦ˆıÿÿÿÿ
+S	java:S106o"9Replace this use of System.out or System.err by a logger.(ßê¸¡üÿÿÿÿ
+S	java:S106p"9Replace this use of System.out or System.err by a logger.(ÕİÉçûÿÿÿÿ
+N	java:S106t"9Replace this use of System.out or System.err by a logger.(‘†Áö
+S	java:S106v"9Replace this use of System.out or System.err by a logger.(™õº’ÿÿÿÿÿ
+N	java:S106{"9Replace this use of System.out or System.err by a logger.(çòªË
+O	java:S106…"9Replace this use of System.out or System.err by a logger.(•ãï°
+T	java:S106‹"9Replace this use of System.out or System.err by a logger.(ŞÒ—üÿÿÿÿ
+T	java:S106Œ"9Replace this use of System.out or System.err by a logger.(±ÿÖíúÿÿÿÿ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(î¿˜½ûÿÿÿÿ
+O	java:S106"9Replace this use of System.out or System.err by a logger.(Ü¼àÖ
+O	java:S106˜"9Replace this use of System.out or System.err by a logger.(ëŞ‹Ø
