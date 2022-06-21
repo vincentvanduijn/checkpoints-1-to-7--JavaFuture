@@ -7,7 +7,8 @@ import Devoteam.Checkpoints.checkpoint4.service.VehicleService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+//JENS: Application niet in test - gebruik standaard JAVA structuur
+//root/applicationname.src.main.java.resources/applicationpackage([com].[devoteam].[futures].[checkpoint4]).files & folders
 public class Application {
 
   public static void main(String[] args) {

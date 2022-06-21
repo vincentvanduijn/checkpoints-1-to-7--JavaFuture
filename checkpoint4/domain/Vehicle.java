@@ -12,10 +12,11 @@ public abstract class Vehicle implements VehicleInterface {
   private int year;
   private VehicleTypeEnum vehicleType;
   private final String DATE_FORMATTER = "MMM dd, yyyy, HH:mm:ss";
+  //JENS: Date dingen in eigen (helper) functie?
   LocalDateTime localDateTime = LocalDateTime.now();
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER, Locale.ENGLISH);
   private final String createdAt;
-
+//Zoek default parameter
   public Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
     this.setAutomaker(automaker);
     this.setModel(model);
@@ -85,7 +86,7 @@ public abstract class Vehicle implements VehicleInterface {
         "Year: " + year + "\n"
         ;
   }
-
+//JENS: Deprecated?
   public void prettyPrint() {
     System.out.println(this.createdAt);
     System.out.println(this.automaker);
