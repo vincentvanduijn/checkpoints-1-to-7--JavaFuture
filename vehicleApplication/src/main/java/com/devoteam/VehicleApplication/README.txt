@@ -10,7 +10,7 @@
 
 // --------21-6-2022------------
 // Updated: Checkpoint 4 uploaded (V1), SolarLint added + configured as an extension to IntelliJ + Add the out file to .gitignore
-// Updated: 
+// Updated:
 // TO DO: When updating the Vehicle, newVehicle now replaces oldVehicle,
 // still need to implement the switch/ if-statement that makes sure the application doesn't take the first model on delete (see picture phone).
 // TO DO: Checkpoint 4 rework (see comments Jens, V2) + push on GIT
