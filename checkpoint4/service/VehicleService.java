@@ -1,14 +1,14 @@
-package Devoteam.Checkpoints.checkpoint3.service;
+package Devoteam.Checkpoints.checkpoint4.service;
+
+import Devoteam.Checkpoints.checkpoint4.domain.Automaker;
+import Devoteam.Checkpoints.checkpoint4.domain.Vehicle;
+import Devoteam.Checkpoints.checkpoint4.domain.VehicleTypeEnum;
+import Devoteam.Checkpoints.checkpoint4.repository.VehicleRepository;
 
 import java.util.ArrayList;
 
-import Devoteam.Checkpoints.checkpoint3.domain.Automaker;
-import Devoteam.Checkpoints.checkpoint3.domain.Vehicle;
-import Devoteam.Checkpoints.checkpoint3.domain.VehicleTypeEnum;
-import Devoteam.Checkpoints.checkpoint3.repository.VehicleRepository;
-
 public class VehicleService {
-    private VehicleRepository vehicleRepository = new VehicleRepository();
+    private static VehicleRepository vehicleRepository = new VehicleRepository();
 
     public ArrayList<Vehicle> searchByAutomaker(String autoMaker) {
         ArrayList<Vehicle> newArray = new ArrayList<Vehicle>();
@@ -38,7 +38,7 @@ public class VehicleService {
         for (Vehicle currentItem : dataset) {
             if (currentItem.getModel().equals(autoModel)) {
                 filteredVehicleList.add(currentItem);
-            } 
+            }
 
         }
 
@@ -52,7 +52,7 @@ public class VehicleService {
         for (Vehicle currentItem : dataset) {
             if (currentItem.getColor().equals(color)) {
                 filteredVehicleList.add(currentItem);
-            } 
+            }
 
         }
 
@@ -198,5 +198,17 @@ public class VehicleService {
     public void deleteVehicleByIndex(int vehicleIndex) {
         vehicleRepository.getVehicleArray().remove(vehicleIndex);
     }
+
+    public static Vehicle returnAllVehicleInIndex() {
+
+        for (Vehicle item : vehicleRepository.getVehicleArray()) {
+            System.out.println(item);
+
+        }
+
+        return null;
+    }
+
+
 
 }
