@@ -1,4 +1,4 @@
-package Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication;
+package main.java.com.devoteam.VehicleApplication;
 
 import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.Automaker;
 import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.Vehicle;
