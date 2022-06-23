@@ -1,4 +1,4 @@
-package Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain;
+package main.java.com.devoteam.VehicleApplication.domain;
 
 public class Motorcycle extends Vehicle {
 

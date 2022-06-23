@@ -1,9 +1,4 @@
-package Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
-
+package main.java.com.devoteam.VehicleApplication.domain;
 
 public abstract class Vehicle implements VehicleInterface {
   private Automaker automaker;
@@ -11,22 +6,18 @@ public abstract class Vehicle implements VehicleInterface {
   private String color;
   private int year;
   private VehicleTypeEnum vehicleType;
-  private final String DATE_FORMATTER = "MMM dd, yyyy, HH:mm:ss";
-  //JENS: Date dingen in eigen (helper) functie?
-  LocalDateTime localDateTime = LocalDateTime.now();
-  DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMATTER, Locale.ENGLISH);
   private final String createdAt;
-  //Zoek default parameter
-  public Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
+
+  protected Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
     this.setAutomaker(automaker);
     this.setModel(model);
     this.setColor(color);
     this.setYear(year);
     this.setVehicleType(vehicleType);
-    this.createdAt = localDateTime.format(formatter);
+    this.createdAt = DateFormater.localDateTime.format(DateFormater.formatter);
   }
 
-  public Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType, String createdAt) {
+  protected Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType, String createdAt) {
     this.setAutomaker(automaker);
     this.setModel(model);
     this.setColor(color);
@@ -75,6 +66,8 @@ public abstract class Vehicle implements VehicleInterface {
     this.vehicleType = vehicleType;
   }
 
+
+
   @Override
   public String toString() {
     return "#------------------------------------------------# \n" +
@@ -87,13 +80,5 @@ public abstract class Vehicle implements VehicleInterface {
         ;
   }
 
-  public void prettyPrint() {
-    System.out.println(this.createdAt);
-    System.out.println(this.automaker);
-    System.out.println(this.model);
-    System.out.println(this.color);
-    System.out.println(this.year);
-    System.out.println(this.vehicleType);
-  }
 
 }
