@@ -18,3 +18,13 @@
 // TO DO: Add a class to domain to house the format logic of the creatAt attribute + change the code for the randomizer +'
 // change the constructors of the CAR and VEHICLE to no longer add creatAt + separate class for "date utility" from repository
 
+// --------22-6-2022------------
+// TO DO: Start from scratch, make DateTimer class + Randomizer class + delete methods for filter + go over the SolarLint comments + comments from Jens
+
+// --------23-6-2022------------
+// Updated: Start from scratch, make DateTimer class + Randomizer class + delete methods for filter + go over the SolarLint comments + comments from Jens
+// TO DO: Bug where option 6 first runs correctly, but on the next run places the overview behind the menu "do you wish to continue"
+// TO DO: When looking at checkpoint 5, make sure to add the "Streams" to update and delete vehicle.
+// This will make sure the program picks the correct index place from the chosen model by the user.
+
+

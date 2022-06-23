@@ -1,13 +1,12 @@
-package Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.repository;
+package main.java.com.devoteam.VehicleApplication.repository;
 
-import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.Automaker;
-import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.Car;
-import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.Vehicle;
-import Devoteam.Checkpoints.vehicleApplication.src.main.java.com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
+import main.java.com.devoteam.VehicleApplication.domain.Automaker;
+import main.java.com.devoteam.VehicleApplication.domain.Car;
+import main.java.com.devoteam.VehicleApplication.domain.Vehicle;
+import main.java.com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Random;
+
 
 public class VehicleRepository {
     ArrayList<Vehicle> vehicleArray = new ArrayList<Vehicle>();
@@ -23,17 +22,7 @@ public class VehicleRepository {
     public void setVehicleArray(ArrayList<Vehicle> vehicleArray) {
         this.vehicleArray = vehicleArray;
     }
-    //JENS: deze functie uit je repository halen een in een helper functie gooien? in ..main.java.nl.devoteam.futures.checkpoint4.util.randomizer.java
 
-    public String randomiseCreatedAt() {
-        //JENS: Er is ongetijfeld een handigere manier (https://www.baeldung.com/java-random-dates), maar als dit werkt is het cool
-        //Een andere developer zou later nooit meer weten wat deze nummers betekenen
-        long ms;
-        Random rnd;
-        rnd = new Random();
-        ms = 946771200000L + (Math.abs(rnd.nextLong()) % (10L * 365 * 24 * 60 * 60 * 1000));
-        return new Date(ms).toString();
-    }
 
     private void createVehicles() {
 
@@ -45,34 +34,34 @@ public class VehicleRepository {
         Automaker automaker6 = new Automaker("Peugot");
 
         // GM
-        Vehicle vehicle01 = new Car(automaker1, "Suburban", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle02 = new Car(automaker1, "Malibu", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle03 = new Car(automaker1, "Silverado", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle01 = new Car(automaker1, "Suburban", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle02 = new Car(automaker1, "Malibu", "Red", 2000, VehicleTypeEnum.CAR, DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle03 = new Car(automaker1, "Silverado", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
 
         // Hyundai
-        Vehicle vehicle11 = new Car(automaker2, "Azera", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle12 = new Car(automaker2, "Sonata", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle13 = new Car(automaker2, "Veloster", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle11 = new Car(automaker2, "Azera", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle12 = new Car(automaker2, "Sonata", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle13 = new Car(automaker2, "Veloster", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
 
         // Volkswagen
-        Vehicle vehicle21 = new Car(automaker3, "Golf", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle22 = new Car(automaker3, "Jetta", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle23 = new Car(automaker3, "Polo", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle21 = new Car(automaker3, "Golf", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle22 = new Car(automaker3, "Jetta", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle23 = new Car(automaker3, "Polo", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
 
         // Audi
-        Vehicle vehicle31 = new Car(automaker4, "A4", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle32 = new Car(automaker4, "Q7", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle33 = new Car(automaker4, "R8", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle31 = new Car(automaker4, "A4", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle32 = new Car(automaker4, "Q7", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle33 = new Car(automaker4, "R8", "Red", 2000, VehicleTypeEnum.CAR, DateRandomizer.randomiseCreatedAt());
 
         // Mercedes
-        Vehicle vehicle41 = new Car(automaker5, "C180", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle42 = new Car(automaker5, "C200", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle43 = new Car(automaker5, "GLA200", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle41 = new Car(automaker5, "C180", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle42 = new Car(automaker5, "C200", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle43 = new Car(automaker5, "GLA200", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
 
         // Peugot
-        Vehicle vehicle51 = new Car(automaker6, "206", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle52 = new Car(automaker6, "208", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
-        Vehicle vehicle53 = new Car(automaker6, "2008", "Red", 2000, VehicleTypeEnum.CAR, randomiseCreatedAt());
+        Vehicle vehicle51 = new Car(automaker6, "206", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle52 = new Car(automaker6, "208", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
+        Vehicle vehicle53 = new Car(automaker6, "2008", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt());
 
         this.vehicleArray.add(vehicle01);
         this.vehicleArray.add(vehicle02);
