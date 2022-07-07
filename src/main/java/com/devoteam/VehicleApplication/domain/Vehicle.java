@@ -1,5 +1,8 @@
 package main.java.com.devoteam.VehicleApplication.domain;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public abstract class Vehicle implements VehicleInterface {
   private Automaker automaker;
   private String model;
@@ -7,6 +10,8 @@ public abstract class Vehicle implements VehicleInterface {
   private int year;
   private VehicleTypeEnum vehicleType;
   private final String createdAt;
+  private final UUID uuid = UUID.randomUUID();
+  private final String id = uuid.toString();
 
   protected Vehicle(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
     this.setAutomaker(automaker);
@@ -24,7 +29,9 @@ public abstract class Vehicle implements VehicleInterface {
     this.setYear(year);
     this.setVehicleType(vehicleType);
     this.createdAt = createdAt;
+
   }
+
 
   public Automaker getAutomaker() {
     return this.automaker;
@@ -69,16 +76,29 @@ public abstract class Vehicle implements VehicleInterface {
 
 
   @Override
-  public String toString() {
-    return "#------------------------------------------------# \n" +
-        "Registration Date: " + createdAt + "\n" +
-        automaker + "\n" +
-        "Model: " + model + "\n" +
-        "Vehicle type: " + vehicleType.vehicleType + "\n" +
-        "Color: " + color + "\n" +
-        "Year: " + year + "\n"
-        ;
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Vehicle vehicle = (Vehicle) o;
+    return Objects.equals(id, vehicle.id);
   }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+
+  @Override
+  public String toString() {
+    return "#------------------------------------------------# \n" +
+            "Registration Date: " + createdAt + "\n" +
+            automaker + "\n" +
+            "Model: " + model + "\n" +
+            "Id Vehicle='" + id + '\n' +
+            "Vehicle type: " + vehicleType + "\n" +
+            "Color: " + color + "\n" +
+            "Year: " + year + "\n"
+            ;
+  }
 
 }
