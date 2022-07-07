@@ -7,6 +7,7 @@ import main.java.com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
 import main.java.com.devoteam.VehicleApplication.service.VehicleService;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,74 +23,83 @@ public class VehicleApplication {
 
     while (looping) {
 
-      logger.log(Level.INFO, " \n Choose your function: \n");
-      logger.log(Level.INFO,"1. Search by automaker");
-      logger.log(Level.INFO,"2. Search by model ");
-      logger.log(Level.INFO,"3. Add vehicle ");
-      logger.log(Level.INFO,"4. Update vehicle ");
-      logger.log(Level.INFO,"5. Delete vehicle");
-      logger.log(Level.INFO,"6. Show all vehicles in the database");
-      logger.log(Level.INFO,"0. Exit Program");
-      int automaker1 = input.nextInt();
+      System.out.println(" \n Choose your function: \n");
+      System.out.println("1. Search by automaker");
+      System.out.println("2. Search by model ");
+      System.out.println("3. Add vehicle ");
+      System.out.println("4. Update vehicle ");
+      System.out.println("5. Delete vehicle");
+      System.out.println("6. Show all vehicles in the database");
+      System.out.println("0. Exit Program");
+      int automakerMenuChoice = input.nextInt();
 
-      switch (automaker1) {
+      switch (automakerMenuChoice) {
         case 1 -> {
-          logger.log(Level.INFO, " \n Choose your automaker brand: ");
+          System.out.println(" \n Choose your automaker brand: ");
           String automakerSelection = input.next();
-          ArrayList<Vehicle> selectedVehicles;
+          List<Vehicle> selectedVehicles = new ArrayList<>();
           selectedVehicles = vehicleService.searchByAutomaker(automakerSelection);
-          for (Vehicle vehicle : selectedVehicles) {
+          if (selectedVehicles == null || selectedVehicles.isEmpty()) {
+            logger.log(Level.INFO, "This is not a valid option, please try again");
+          }else {
+            for (Vehicle vehicle : selectedVehicles) {
             System.out.println(vehicle);
+          }
+
           }
         }
         case 2 -> {
-          logger.log(Level.INFO," \n Choose your car model: ");
-          String automakerSelection2 = input.next();
-          Vehicle selectedModel;
-          selectedModel = vehicleService.searchByModel(automakerSelection2);
-          if (selectedModel == null) {
+          System.out.println(" \n Choose your car model: ");
+          String automakerModelSelection = input.next();
+          List<Vehicle> selectedModel = new ArrayList<>();
+          selectedModel = vehicleService.searchByModel(automakerModelSelection);
+          if (selectedModel == null || selectedModel.isEmpty()) {
             logger.log(Level.INFO,"This is not a valid option, please try again");
           } else {
             System.out.println(selectedModel);
           }
         }
         case 3 -> {
-          logger.log(Level.INFO," \n Choose what vehicle to add, ");
-          logger.log(Level.INFO," \n Choose automaker name: ");
+          System.out.println(" \n Choose what vehicle to add, ");
+          System.out.println(" \n Choose automaker name: ");
           String autoMakerName = input.next();
-          logger.log(Level.INFO," \n Choose the vehicle type: ");
+          System.out.println(" \n Choose the vehicle type: ");
           String vehicleType = input.next();
-          logger.log(Level.INFO," \n Choose model: ");
+          System.out.println(" \n Choose model: ");
           String model = input.next();
-          logger.log(Level.INFO," \n Choose color: ");
+          System.out.println(" \n Choose color: ");
           String color = input.next();
-          logger.log(Level.INFO," \n Choose year: ");
+          System.out.println(" \n Choose year: ");
           int year = input.nextInt();
           vehicleService.addVehicle(autoMakerName, model, color, year, vehicleType);
         }
         case 4 -> {
-          logger.log(Level.INFO," \n Choose what vehicle to update, ");
-          logger.log(Level.INFO,"Select a vehicle model to update:");
+          System.out.println(" \n Choose what vehicle to update, ");
+          System.out.println("Select a vehicle model to update:");
           String vehicleModelInputModel = input.next();
           int updateResponseIndex = vehicleService.updateVehicleModel(vehicleModelInputModel);
           if (updateResponseIndex > 0) {
-            logger.log(Level.INFO," \n Choose automaker name: ");
+            System.out.println(" \n Choose automaker name: ");
             String newAutoMakerName = input.next();
-            logger.log(Level.INFO," \n Choose the vehicle type: ");
+            System.out.println(" \n Choose the vehicle type: ");
             String newVehicleType = input.next();
-            logger.log(Level.INFO," \n Choose model: ");
+            System.out.println(" \n Choose model: ");
             String newModel = input.next();
-            logger.log(Level.INFO," \n Choose color: ");
+            System.out.println(" \n Choose color: ");
             String newColor = input.next();
-            logger.log(Level.INFO," \n Choose year: ");
+            System.out.println(" \n Choose year: ");
             int newYear = input.nextInt();
-            Automaker newVehicleAutomaker = new Automaker(newAutoMakerName);
+            Automaker newVehicleAutomaker = vehicleService.getExistingAutomaker(newAutoMakerName);
+            if (newVehicleAutomaker == null) {
+              logger.log(Level.INFO,"No automaker found with the given name.");
+              break;
+            }
             boolean vehicleTypeCheck = vehicleService.vehicleTypeExists(newVehicleType);
             if (vehicleTypeCheck) {
-              Vehicle newVehicle = VehicleTypeEnum.valueOf(newVehicleType).createNewVehicle(newVehicleAutomaker,
+              Vehicle newVehicle = VehicleTypeEnum.valueOf(newVehicleType).buildNewVehicle(newVehicleAutomaker,
                       newModel, newColor, newYear);
-              Vehicle oldVehicle = vehicleService.searchByModel(vehicleModelInputModel);
-              vehicleService.updateVehicle(oldVehicle, newVehicle);
+              List<Vehicle> oldVehicle = vehicleService.searchByModel(vehicleModelInputModel);
+              vehicleService.updateVehicle((Vehicle) oldVehicle, newVehicle);
             } else {
               logger.log(Level.INFO,"Something went wrong, vehicle was not updated.");
             }
@@ -98,39 +108,39 @@ public class VehicleApplication {
           }
         }
         case 5 -> {
-          logger.log(Level.INFO," \n Choose what vehicle to delete, ");
-          logger.log(Level.INFO," \n Choose the model of the vehicle you want to delete: ");
+          System.out.println(" \n Choose what vehicle to delete, ");
+          System.out.println(" \n Choose the model of the vehicle you want to delete: ");
           String modelToDelete = input.next();
           Boolean serviceResponse = vehicleService.deleteVehicleByModel(modelToDelete);
           if (Boolean.TRUE.equals(serviceResponse)) {
-            logger.log(Level.INFO,"Vehicle was deleted.");
+            System.out.println("Vehicle was deleted.");
           } else {
             logger.log(Level.INFO,"Something went wrong, vehicle was not deleted.");
           }
         }
         case 6 -> {
-          logger.log(Level.INFO," \n List of all vehicles in the database: ");
+          System.out.println(" \n List of all vehicles in the database: ");
           VehicleService.returnAllVehicleInIndex();
         }
         case 0 -> {
           return;
         }
-        default -> logger.log(Level.INFO,"Please, select on of the above options");
+        default -> System.out.println("Please, select on of the above options");
       }
 
       while (true) {
         Scanner input2 = new Scanner(System.in);
 
-        logger.log(Level.INFO,"Do you wish to continue? \n");
-        logger.log(Level.INFO,"1. Yes");
-        logger.log(Level.INFO,"2. No");
+        System.out.println("Do you wish to continue? \n");
+        System.out.println("1. Yes");
+        System.out.println("2. No");
 
-        int continue1 = input2.nextInt();
+        int continueWithApplication = input2.nextInt();
 
-        if (continue1 == 2) {
+        if (continueWithApplication == 2) {
           looping = false;
           break;
-        } else if (continue1 == 1) {
+        } else if (continueWithApplication == 1) {
           break;
         } else {
           logger.log(Level.INFO,"Please pick a valid option");
