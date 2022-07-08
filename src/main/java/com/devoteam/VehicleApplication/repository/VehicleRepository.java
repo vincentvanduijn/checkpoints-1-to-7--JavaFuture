@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class VehicleRepository {
-    List<Vehicle> vehicleArray = new ArrayList<Vehicle>();
+    List<Vehicle> vehicleArray = new ArrayList<>();
     AutomakerRepository automakerRepository;
 
     public VehicleRepository(AutomakerRepository automakerRepository) {
@@ -18,11 +18,11 @@ public class VehicleRepository {
         this.createVehicles();
     }
 
-    public ArrayList<Vehicle> getVehicleArray() {
-        return (ArrayList<Vehicle>) this.vehicleArray;
+    public List<Vehicle> getVehicleArray() {
+        return this.vehicleArray;
     }
 
-    public void setVehicleArray(ArrayList<Vehicle> vehicleArray) {
+    public void setVehicleArray(List<Vehicle> vehicleArray) {
         this.vehicleArray = vehicleArray;
     }
 
