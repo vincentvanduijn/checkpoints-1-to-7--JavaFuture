@@ -39,11 +39,16 @@
 
 // --------7-7-2022------------
 // Updated: Checkpoint 5 point 1,2,3,4,5,6 and 7 are done
-// Updated: Make all search function into Streams
+// Updated: Make all search function methods into Streams
 // TO DO: Change update Vehicle to update instead of create/ delete, check for the correct index and start using streams
 // TO DO: Add a VerhicleServiceHelper class and put the info in the switches in methods and call them from the class
-// TO DO: Ask Jens why there are brackets in the outprint with the searchByModel but not the searchByAutomaker + if ALL for each loops should be (can be?) replaced
-// instead of just the searchByAutomaker and searchByModel methods as stated in checkpoint 5. 
+// TO DO: If ALL for each loops should be (can be?) replaced instead of just the searchByAutomaker and searchByModel methods as stated in checkpoint 5. 
+// TO DO: Delete Vehicle now prints all Vehicles, needs a fix + update vehicle doesn't recognize the Model that is inputted (this has to do with the streams search functions)
 
+// --------8-7-2022------------
+// Bugfix: Delete Vehicle now prints all Vehicles, needs a fix + update vehicle doesn't recognize the Model that is inputted (this has to do with the streams search functions)
+// Updated: Add a VerhicleServiceHelper class and put the info in the switches in methods and call them from the class
+// TO DO: Change update Vehicle to update instead of create/ delete, check for the correct index and start using streams
+// TO DO: If ALL for each loops should be (can be?) replaced instead of just the searchByAutomaker and searchByModel methods as stated in checkpoint 5. 
 
 

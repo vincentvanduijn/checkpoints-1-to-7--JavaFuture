@@ -6,11 +6,9 @@ import main.java.com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
 import main.java.com.devoteam.VehicleApplication.repository.AutomakerRepository;
 import main.java.com.devoteam.VehicleApplication.repository.VehicleRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 
 public class VehicleService {
@@ -21,20 +19,17 @@ public class VehicleService {
     Logger logger = Logger.getLogger(VehicleService.class.getName());
 
     public List<Vehicle> searchByAutomaker(String autoMaker) {
-        List<Vehicle> newArray = vehicleRepository.getVehicleArray().stream()
-                .filter(na -> na.getAutomaker().getName().equals(autoMaker))
-                .collect(Collectors.toList());
-
-        return newArray;
+        return vehicleRepository.getVehicleArray().stream()
+                .filter(sam -> sam.getAutomaker().getName().equals(autoMaker))
+                .toList();
     }
 
      public List<Vehicle> searchByModel(String autoModel) {
-         List<Vehicle> item = vehicleRepository.getVehicleArray().stream()
-                 .filter(i -> i.getModel().equals(autoModel))
-                 .collect(Collectors.toList());
-
-         return item;
+         return vehicleRepository.getVehicleArray().stream()
+                 .filter(sbm -> sbm.getModel().equals(autoModel))
+                 .toList();
      }
+
 
     public void addVehicle(String automakerName, String model, String color, int year, String vehicleType) {
         Automaker automaker1 = getExistingAutomaker(automakerName);
@@ -47,8 +42,7 @@ public class VehicleService {
             return;
         }
         Vehicle addedVehicle = VehicleTypeEnum.valueOf(vehicleType).buildNewVehicle(automaker1, model, color, year);
-        ArrayList<Vehicle> vehicleList;
-        vehicleList = vehicleRepository.getVehicleArray();
+        List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         for (Vehicle item : vehicleRepository.getVehicleArray()) {
             if (item.getModel().equals(model)
                     && item.getVehicleType().equals(VehicleTypeEnum.valueOf(vehicleType))
@@ -61,11 +55,11 @@ public class VehicleService {
         }
         vehicleList.add(addedVehicle);
         vehicleRepository.setVehicleArray(vehicleList);
-        System.out.println("Vehicle was updated");
+        System.out.println("Vehicle was added");
     }
 
     public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
-        ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+       List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         int vehicleIndex = vehicleList.indexOf(oldVehicle);
         if (oldVehicle.getModel().equals(newVehicle.getModel())
                 && oldVehicle.getVehicleType().equals(newVehicle.getVehicleType())
@@ -80,11 +74,12 @@ public class VehicleService {
     }
 
     public int updateVehicleModel(String model) {
-        ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+        List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         List<Vehicle> vehicleResponse = searchByModel(model);
 
-        if (vehicleResponse != null) {
-            return vehicleList.indexOf(vehicleResponse);
+        if (!vehicleResponse.isEmpty()) {
+            Vehicle vehicleResponseObject = vehicleResponse.get(0);
+            return vehicleList.indexOf(vehicleResponseObject);
         } else {
             logger.log(Level.INFO,"No vehicle with that model was found.");
             return -1;
@@ -92,11 +87,13 @@ public class VehicleService {
     }
 
     public Boolean deleteVehicleByModel(String model) {
+        List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         List<Vehicle> vehicleResponse = searchByModel(model);
-        if (vehicleResponse != null) {
-            ArrayList<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
-            System.out.println(vehicleList);
-            vehicleList.remove(vehicleResponse);
+        if (!vehicleResponse.isEmpty()) {
+            for (Vehicle vehicle : vehicleResponse) {
+                System.out.println(vehicle);
+                vehicleList.remove(vehicle);
+            }
             return true;
         } else {
             logger.log(Level.INFO,"No vehicle with that model was found.");
