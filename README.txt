@@ -51,4 +51,5 @@
 // TO DO: Change update Vehicle to update instead of create/ delete, check for the correct index and start using streams
 // TO DO: If ALL for each loops should be (can be?) replaced instead of just the searchByAutomaker and searchByModel methods as stated in checkpoint 5. 
 
-
+// --------11-7-2022------------
+// Updated: Added the DRAWIO file for checkpoint 6 in the Checkpoint folder, open on app.diagrams.net

@@ -18,18 +18,26 @@ public class VehicleService {
 
     Logger logger = Logger.getLogger(VehicleService.class.getName());
 
+    public static void returnAllVehicleInIndex() {
+
+        for (Vehicle item : vehicleRepository.getVehicleArray()) {
+            System.out.println(item);
+
+        }
+
+    }
+
     public List<Vehicle> searchByAutomaker(String autoMaker) {
         return vehicleRepository.getVehicleArray().stream()
                 .filter(sam -> sam.getAutomaker().getName().equals(autoMaker))
                 .toList();
     }
 
-     public List<Vehicle> searchByModel(String autoModel) {
-         return vehicleRepository.getVehicleArray().stream()
-                 .filter(sbm -> sbm.getModel().equals(autoModel))
-                 .toList();
-     }
-
+    public List<Vehicle> searchByModel(String autoModel) {
+        return vehicleRepository.getVehicleArray().stream()
+                .filter(sbm -> sbm.getModel().equals(autoModel))
+                .toList();
+    }
 
     public void addVehicle(String automakerName, String model, String color, int year, String vehicleType) {
         Automaker automaker1 = getExistingAutomaker(automakerName);
@@ -49,7 +57,7 @@ public class VehicleService {
                     && item.getAutomaker().getName().equals(automakerName)
                     && item.getColor().equals(color)
                     && item.getYear() == year) {
-                logger.log(Level.INFO,"This is a duplicate entry, please try again");
+                logger.log(Level.INFO, "This is a duplicate entry, please try again");
                 return;
             }
         }
@@ -59,14 +67,14 @@ public class VehicleService {
     }
 
     public void updateVehicle(Vehicle oldVehicle, Vehicle newVehicle) {
-       List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
+        List<Vehicle> vehicleList = vehicleRepository.getVehicleArray();
         int vehicleIndex = vehicleList.indexOf(oldVehicle);
         if (oldVehicle.getModel().equals(newVehicle.getModel())
                 && oldVehicle.getVehicleType().equals(newVehicle.getVehicleType())
                 && oldVehicle.getAutomaker().getName().equals(newVehicle.getAutomaker().getName())
                 && oldVehicle.getColor().equals(newVehicle.getColor())
                 && oldVehicle.getYear() == newVehicle.getYear()) {
-            logger.log(Level.INFO,"The update you tried to pass is the same as an existing vehicle");
+            logger.log(Level.INFO, "The update you tried to pass is the same as an existing vehicle");
         } else {
             vehicleList.set(vehicleIndex, newVehicle);
             System.out.println("Update confirmed");
@@ -81,7 +89,7 @@ public class VehicleService {
             Vehicle vehicleResponseObject = vehicleResponse.get(0);
             return vehicleList.indexOf(vehicleResponseObject);
         } else {
-            logger.log(Level.INFO,"No vehicle with that model was found.");
+            logger.log(Level.INFO, "No vehicle with that model was found.");
             return -1;
         }
     }
@@ -96,7 +104,7 @@ public class VehicleService {
             }
             return true;
         } else {
-            logger.log(Level.INFO,"No vehicle with that model was found.");
+            logger.log(Level.INFO, "No vehicle with that model was found.");
             return false;
         }
 
@@ -110,21 +118,11 @@ public class VehicleService {
             }
         }
         if (tries == VehicleTypeEnum.values().length) {
-            logger.log(Level.INFO,"This is a non existing vehicle type, please try again");
+            logger.log(Level.INFO, "This is a non existing vehicle type, please try again");
             return false;
         } else {
             return true;
         }
-    }
-
-
-    public static void returnAllVehicleInIndex() {
-
-        for (Vehicle item : vehicleRepository.getVehicleArray()) {
-            System.out.println(item);
-
-        }
-
     }
 
     public Automaker getExistingAutomaker(String automakerName) {
@@ -135,7 +133,6 @@ public class VehicleService {
             return foundAutomaker;
         }
     }
-
 
 
 }

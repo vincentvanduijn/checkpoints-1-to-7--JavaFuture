@@ -16,6 +16,18 @@ public class VehicleApplicationLogic {
     VehicleService vehicleService = new VehicleService();
     Logger logger = Logger.getLogger(VehicleApplication.class.getName());
 
+
+    public void menuLogic() {
+        System.out.println(" \n Choose your function: \n");
+        System.out.println("1. Search by automaker");
+        System.out.println("2. Search by model ");
+        System.out.println("3. Add vehicle ");
+        System.out.println("4. Update vehicle ");
+        System.out.println("5. Delete vehicle");
+        System.out.println("6. Show all vehicles in the database");
+        System.out.println("0. Exit Program");
+    }
+
     public void switch1Logic() {
         System.out.println(" \n Choose your automaker brand: ");
         String automakerSelection = input.next();
@@ -28,8 +40,6 @@ public class VehicleApplicationLogic {
             }
 
         }
-
-
 
     public void switch2Logic() {
         System.out.println(" \n Choose your car model: ");
