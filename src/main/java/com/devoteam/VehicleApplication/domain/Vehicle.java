@@ -94,7 +94,7 @@ public abstract class Vehicle implements VehicleInterface {
             "Registration Date: " + createdAt + "\n" +
             automaker + "\n" +
             "Model: " + model + "\n" +
-            "Id Vehicle='" + id + '\n' +
+            "Id Vehicle: " + id + '\n' +
             "Vehicle type: " + vehicleType + "\n" +
             "Color: " + color + "\n" +
             "Year: " + year + "\n"
