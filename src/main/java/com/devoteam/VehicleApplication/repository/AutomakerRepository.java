@@ -1,7 +1,6 @@
 package main.java.com.devoteam.VehicleApplication.repository;
 
 import main.java.com.devoteam.VehicleApplication.domain.Automaker;
-import main.java.com.devoteam.VehicleApplication.domain.Vehicle;
 
 import java.util.ArrayList;
 import java.util.List;

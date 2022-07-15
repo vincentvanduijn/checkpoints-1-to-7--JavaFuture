@@ -53,3 +53,15 @@
 
 // --------11-7-2022------------
 // Updated: Added the DRAWIO file for checkpoint 6 in the Checkpoint folder, open on app.diagrams.net
+
+//---------12-7-2022-------------
+// TO DO: Update the Java files to make sure the "update" method now updates all vehicles with the same model name
+// TO DO: Look at the Java comments and change them 
+// TO DO: Normal forms in Database, naming column name on Database (Pascal case, camel case, snake case, kebab case). _between words + no uppercase letters
+
+//---------14-7-2022-------------
+// Updated: Changed checkpoint 6 to use the correct camel case. Added _between words + no uppercase letters
+// Updated: Added toString options to the first and second switch logic to remove the List display of [ and ] and , and added the trim() function
+// Updated: Made the continue menu into a boolean (talk with Ayush and Jens why this doesn't improve the code)
+// Updated: Update vehicle model now replaces all values of the inputed model name + no longer replaces the position in the List (true update instead of a delete and replace)
+// Updated: Delete now uses a forEach to delete (remove) the vehicles, same code for the update method
