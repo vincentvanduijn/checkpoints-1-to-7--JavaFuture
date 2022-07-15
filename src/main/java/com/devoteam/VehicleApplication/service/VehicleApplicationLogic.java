@@ -33,23 +33,33 @@ public class VehicleApplicationLogic {
         String automakerSelection = input.next();
         List<Vehicle> selectedVehicles = new ArrayList<>();
         selectedVehicles = vehicleService.searchByAutomaker(automakerSelection);
-        if (selectedVehicles == null || selectedVehicles.isEmpty()) {
+        String formattedSelectedVehicles = selectedVehicles.toString()
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+        if (selectedVehicles.isEmpty()) {
             logger.log(Level.INFO, "This is not a valid option, please try again");
         } else {
-                System.out.println(selectedVehicles);
-            }
-
+            System.out.println(formattedSelectedVehicles);
         }
+
+    }
 
     public void switch2Logic() {
         System.out.println(" \n Choose your car model: ");
         String automakerModelSelection = input.next();
         List<Vehicle> selectedModel = new ArrayList<>();
         selectedModel = vehicleService.searchByModel(automakerModelSelection);
-        if (selectedModel == null || selectedModel.isEmpty()) {
+        String formattedSelectedModel = selectedModel.toString()
+                .replace(",", "")
+                .replace("[", "")
+                .replace("]", "")
+                .trim();
+        if (selectedModel.isEmpty()) {
             logger.log(Level.INFO, "This is not a valid option, please try again");
         } else {
-                System.out.println(selectedModel);
+            System.out.println(formattedSelectedModel);
 
         }
     }
@@ -73,8 +83,8 @@ public class VehicleApplicationLogic {
         System.out.println(" \n Choose what vehicle to update, ");
         System.out.println("Select a vehicle model to update:");
         String vehicleModelInputModel = input.next();
-        int updateResponseIndex = vehicleService.updateVehicleModel(vehicleModelInputModel);
-        if (updateResponseIndex > 0) {
+        boolean modelExists = vehicleService.vehicleModelExists(vehicleModelInputModel);
+        if (modelExists) {
             System.out.println(" \n Choose automaker name: ");
             String newAutoMakerName = input.next();
             System.out.println(" \n Choose the vehicle type: ");
@@ -92,10 +102,8 @@ public class VehicleApplicationLogic {
             }
             boolean vehicleTypeCheck = vehicleService.vehicleTypeExists(newVehicleType);
             if (vehicleTypeCheck) {
-                Vehicle newVehicle = VehicleTypeEnum.valueOf(newVehicleType).buildNewVehicle(newVehicleAutomaker,
-                        newModel, newColor, newYear);
-                List<Vehicle> oldVehicle = vehicleService.searchByModel(vehicleModelInputModel);
-                vehicleService.updateVehicle(oldVehicle.get(0), newVehicle);
+                List<Vehicle> existingVehicles = vehicleService.searchByModel(vehicleModelInputModel);
+                existingVehicles.forEach(vehicleInExistingVehicles -> vehicleService.updateVehicle(vehicleInExistingVehicles, newVehicleAutomaker, newModel, newColor, newYear, VehicleTypeEnum.valueOf(newVehicleType)));
             } else {
                 logger.log(Level.INFO, "Something went wrong, vehicle was not updated.");
             }

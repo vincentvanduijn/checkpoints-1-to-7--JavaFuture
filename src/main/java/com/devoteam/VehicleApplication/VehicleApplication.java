@@ -10,7 +10,7 @@ public class VehicleApplication {
 
     public static void main(String[] args) {
 
-        Scanner input = new Scanner(System.in);
+        Scanner inputForSwitchMenu = new Scanner(System.in);
         Logger logger = Logger.getLogger(VehicleApplication.class.getName());
         boolean looping = true;
         VehicleApplicationLogic vehicleApplicationLogic = new VehicleApplicationLogic();
@@ -18,7 +18,7 @@ public class VehicleApplication {
         while (looping) {
 
             vehicleApplicationLogic.menuLogic();
-            int automakerMenuChoice = input.nextInt();
+            int automakerMenuChoice = inputForSwitchMenu.nextInt();
 
             switch (automakerMenuChoice) {
                 case 1 -> vehicleApplicationLogic.switch1Logic();
@@ -33,20 +33,23 @@ public class VehicleApplication {
                 default -> System.out.println("Please, select on of the above options");
             }
 
-            while (true) {
-                Scanner input2 = new Scanner(System.in);
+            boolean gettingAnswerFromUser = true;
+            while (gettingAnswerFromUser) {
+                Scanner inputForChooseToContinueMenu = new Scanner(System.in);
 
-                System.out.println("Do you wish to continue? \n");
+                System.out.println("\nDo you wish to continue? \n");
                 System.out.println("1. Yes");
                 System.out.println("2. No");
 
-                int continueWithApplication = input2.nextInt();
+                int chooseToContinue = inputForChooseToContinueMenu.nextInt();
+                boolean continuingApplication = chooseToContinue == 1;
+                boolean quittingApplication = chooseToContinue == 2;
 
-                if (continueWithApplication == 2) {
+                if (continuingApplication) {
+                    gettingAnswerFromUser = false;
+                } else if (quittingApplication) {
+                    gettingAnswerFromUser = false;
                     looping = false;
-                    break;
-                } else if (continueWithApplication == 1) {
-                    break;
                 } else {
                     logger.log(Level.INFO, "Please pick a valid option");
                 }
