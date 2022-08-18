@@ -1,97 +1,174 @@
-package main.java.com.devoteam.VehicleApplication.repository;
+package com.devoteam.VehicleApplication.repository;
 
-import main.java.com.devoteam.VehicleApplication.domain.Automaker;
-import main.java.com.devoteam.VehicleApplication.domain.Car;
-import main.java.com.devoteam.VehicleApplication.domain.Vehicle;
-import main.java.com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
+import com.devoteam.VehicleApplication.conn.ConnectionFactory;
+import com.devoteam.VehicleApplication.domain.Vehicle;
+import com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
+import lombok.extern.log4j.Log4j2;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-
+@Log4j2
 public class VehicleRepository {
-    List<Vehicle> vehicleArray = new ArrayList<>();
-    AutomakerRepository automakerRepository;
+    static Logger logger = Logger.getLogger(VehicleRepository.class.getName());
 
-    public VehicleRepository(AutomakerRepository automakerRepository) {
-        this.automakerRepository = automakerRepository;
-        this.createVehicles();
+    public static List<Vehicle> findByNameAutomaker(String name) {
+        log.info("Searching for all vehicles from automaker '{}'", name);
+        List<Vehicle> vehicles = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementFindByNameAutomaker(conn, name);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                vehicleBuilder(vehicles, rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.log(Level.WARNING, "Error finding automaker by name");
+        }
+        return vehicles;
     }
 
-    public List<Vehicle> getVehicleArray() {
-        return this.vehicleArray;
+    private static PreparedStatement createPreparedStatementFindByNameAutomaker(Connection conn, String name) throws SQLException {
+        String sql = "SELECT v.name, v.color, v.id, v.year, v.type, v.created_on " +
+                "FROM vehicle AS v INNER JOIN automaker AS a ON v.automaker_id = a.id WHERE a.name = ?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, String.format("%s", name));
+        return ps;
     }
 
-    public void setVehicleArray(List<Vehicle> vehicleArray) {
-        this.vehicleArray = vehicleArray;
+    public static List<Vehicle> findByNameModel(String name) {
+        log.info("Searching for all vehicle models named '{}'", name);
+        List<Vehicle> vehicles = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementFindByNameModel(conn, name);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                vehicleBuilder(vehicles, rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.log(Level.WARNING, "Error finding vehicles by model name");
+        }
+        return vehicles;
     }
 
-
-    private void createVehicles() {
-
-        Automaker automaker1 = new Automaker("GM");
-        Automaker automaker2 = new Automaker("Hyundai");
-        Automaker automaker3 = new Automaker("Volkswagen");
-        Automaker automaker4 = new Automaker("Audi");
-        Automaker automaker5 = new Automaker("Mercedes");
-        Automaker automaker6 = new Automaker("Peugeot");
-
-        automakerRepository.addToAutomakerArray(automaker1);
-        automakerRepository.addToAutomakerArray(automaker2);
-        automakerRepository.addToAutomakerArray(automaker3);
-        automakerRepository.addToAutomakerArray(automaker4);
-        automakerRepository.addToAutomakerArray(automaker5);
-        automakerRepository.addToAutomakerArray(automaker6);
-
-        // GM
-        Vehicle vehicle01 = new Car(automaker1, "Suburban", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle02 = new Car(automaker1, "Malibu", "Red", 2000, VehicleTypeEnum.CAR, DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle03 = new Car(automaker1, "Silverado", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-
-        // Hyundai
-        Vehicle vehicle11 = new Car(automaker2, "Azera", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle12 = new Car(automaker2, "Sonata", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle13 = new Car(automaker2, "Veloster", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-
-        // Volkswagen
-        Vehicle vehicle21 = new Car(automaker3, "Golf", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle22 = new Car(automaker3, "Jetta", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle23 = new Car(automaker3, "Polo", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-
-        // Audi
-        Vehicle vehicle31 = new Car(automaker4, "A4", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle32 = new Car(automaker4, "Q7", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle33 = new Car(automaker4, "R8", "Red", 2000, VehicleTypeEnum.CAR, DateRandomizer.randomiseCreatedAt() );
-
-        // Mercedes
-        Vehicle vehicle41 = new Car(automaker5, "C180", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle42 = new Car(automaker5, "C200", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle43 = new Car(automaker5, "GLA200", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-
-        // Peugeot
-        Vehicle vehicle51 = new Car(automaker6, "206", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle52 = new Car(automaker6, "208", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-        Vehicle vehicle53 = new Car(automaker6, "2008", "Red", 2000, VehicleTypeEnum.CAR,DateRandomizer.randomiseCreatedAt() );
-
-        vehicleArray.add(vehicle01);
-        vehicleArray.add(vehicle02);
-        vehicleArray.add(vehicle03);
-        vehicleArray.add(vehicle11);
-        vehicleArray.add(vehicle12);
-        vehicleArray.add(vehicle13);
-        vehicleArray.add(vehicle21);
-        vehicleArray.add(vehicle22);
-        vehicleArray.add(vehicle23);
-        vehicleArray.add(vehicle31);
-        vehicleArray.add(vehicle32);
-        vehicleArray.add(vehicle33);
-        vehicleArray.add(vehicle41);
-        vehicleArray.add(vehicle42);
-        vehicleArray.add(vehicle43);
-        vehicleArray.add(vehicle51);
-        vehicleArray.add(vehicle52);
-        vehicleArray.add(vehicle53);
-
+    private static PreparedStatement createPreparedStatementFindByNameModel(Connection conn, String name) throws SQLException {
+        String sql = "SELECT * FROM auto_dealer.vehicle WHERE vehicle.name = ?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, String.format("%s", name));
+        return ps;
     }
 
+    public static List<Vehicle> findAllVehicles() {
+        List<Vehicle> vehicles = new ArrayList<>();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementFindAll(conn);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                vehicleBuilder(vehicles, rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.log(Level.WARNING, "Error finding all vehicles in database");
+        }
+        return vehicles;
+    }
+
+    private static PreparedStatement createPreparedStatementFindAll(Connection conn) throws SQLException {
+        String sql = "SELECT * FROM auto_dealer.vehicle;";
+        return conn.prepareStatement(sql);
+    }
+
+    public static void removeVehicleByModel(Vehicle vehicle) {
+        log.info("Removing vehicle named '{}' from database", vehicle.getModel());
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementRemoveVehicleByModel(conn, vehicle)) {
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.log(Level.WARNING, "Error removing vehicle(s) from database");
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementRemoveVehicleByModel(Connection conn, Vehicle vehicle) throws SQLException {
+        String sql = "DELETE FROM auto_dealer.vehicle WHERE vehicle.id = ?;";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, vehicle.getId());
+        return ps;
+    }
+
+    public static void replaceVehicle(Vehicle vehicle) {
+        log.info("Updating all vehicles named '{}' from database", vehicle.getModel());
+        try (Connection connection = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementUpdate(connection, vehicle)) {
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static PreparedStatement createPreparedStatementUpdate(Connection conn, Vehicle vehicle) throws SQLException {
+        String sql = "UPDATE vehicle AS v INNER JOIN automaker AS a ON v.automaker_id = a.id " +
+                "SET v.name = ?, v.color = ?, v.year = ?, v.type = ?, v.created_on = ?, v.automaker_id = ?, v.id = v.id " +
+                "WHERE v.id = ?";
+
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, vehicle.getModel());
+        ps.setString(2, vehicle.getColor());
+        ps.setInt(3, vehicle.getYear());
+        ps.setString(4, String.valueOf(vehicle.getVehicleType()));
+        ps.setTimestamp(5, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+        ps.setInt(6, vehicle.getAutomaker().getId());
+        ps.setInt(7, vehicle.getId());
+        return ps;
+    }
+
+    public static int saveVehicle(Vehicle vehicle) {
+        log.info("Saving vehicle model named '{}' in the database", vehicle.getModel());
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement ps = createPreparedStatementSaveVehicle(conn, vehicle)) {
+            ps.execute();
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            logger.log(Level.WARNING, "Error saving vehicle in the database");
+        }
+        return -1;
+    }
+
+    private static PreparedStatement createPreparedStatementSaveVehicle(Connection conn, Vehicle vehicle) throws SQLException {
+        String sql = "INSERT INTO auto_dealer.vehicle (vehicle.name, vehicle.color, vehicle.year, vehicle.type, vehicle.created_on, vehicle.automaker_id)" +
+                " VALUES (?,?,?,?,?,?);";
+        PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, vehicle.getModel());
+        ps.setString(2, vehicle.getColor());
+        ps.setInt(3, vehicle.getYear());
+        ps.setString(4, String.valueOf(vehicle.getVehicleType()));
+        ps.setTimestamp(5, java.sql.Timestamp.valueOf(java.time.LocalDateTime.now()));
+        ps.setInt(6, vehicle.getAutomaker().getId());
+        return ps;
+    }
+
+    private static void vehicleBuilder(List<Vehicle> vehicles, ResultSet rs) throws SQLException {
+        Vehicle vehicle = Vehicle
+                .builder()
+                .id(rs.getInt("id"))
+                .model(rs.getString("name"))
+                .color(rs.getString("color"))
+                .year(rs.getInt("year"))
+                .createdOn(rs.getDate("created_on"))
+                .vehicleType(VehicleTypeEnum.valueOf(rs.getString("type")))
+                .build();
+        vehicles.add(vehicle);
+    }
 }
+
+
+
