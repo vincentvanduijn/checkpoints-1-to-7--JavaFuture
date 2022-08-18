@@ -1,4 +1,4 @@
-package main.java.com.devoteam.VehicleApplication.domain;
+package com.devoteam.VehicleApplication.domain;
 
 
 public interface VehicleInterface {

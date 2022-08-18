@@ -1,8 +1,10 @@
-package main.java.com.devoteam.VehicleApplication.domain;
+package com.devoteam.VehicleApplication.domain;
+
+import java.util.Date;
 
 public class Pickup extends Vehicle {
 
-    public Pickup(Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
-        super(automaker, model, color, year, vehicleType);
+    public Pickup(int id, Date createdOn, Automaker automaker, String model, String color, int year, VehicleTypeEnum vehicleType) {
+        super(id, createdOn, automaker, model, color, year, vehicleType);
     }
 }
