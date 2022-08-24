@@ -4,3 +4,11 @@
 /out
 /.idea
 .iml
+/target/
+.idea/
+.idea
+/target
+target/
+
+
+
