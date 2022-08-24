@@ -50,5 +50,4 @@ public enum VehicleTypeEnum {
     }
 
     public abstract Vehicle buildNewVehicle(int id, Date createdOn, Automaker automaker, String model, String color, int year);
-
 }

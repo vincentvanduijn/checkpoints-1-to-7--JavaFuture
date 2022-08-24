@@ -57,11 +57,7 @@ public class VehicleApplication {
                 } else {
                     logger.log(Level.WARNING, "Please pick a valid option");
                 }
-
             }
-
         }
-
     }
-
 }

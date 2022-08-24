@@ -28,5 +28,4 @@ public class Vehicle implements VehicleInterface {
                 "Created on: " + createdOn + "\n"
                 ;
     }
-
 }
