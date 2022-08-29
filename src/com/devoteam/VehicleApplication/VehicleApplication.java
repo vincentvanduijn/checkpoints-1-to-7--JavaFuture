@@ -29,8 +29,6 @@ public class VehicleApplication {
                 case 4 -> applicationService.switch4Logic();
                 case 5 -> applicationService.switch5Logic();
                 case 6 -> applicationService.switch6Logic();
-                case 7 -> applicationService.switch7Logic();
-                case 8 -> applicationService.switch8Logic();
                 case 0 -> {
                     return;
                 }

@@ -68,12 +68,23 @@
 // To Do: Make updated_on column, for the update (DateTime mySQL -> unix timestamp Java). Make the created_on for save (LocalDateTime)
 
 //---------18-8-2022------------
-// To Do: Make sure to catch exceptions when invalid input is given by the user
-// To Do: Make sure the output in switch option 2 and 6 display the Automaker name or id. 
+// To Do: Make sure to catch InputMismatchexceptions when invalid input is given by the user
+// Updated: Make sure the output in switch option 1,2 and 6 display the Automaker name or id. 
 // To Do: Search function save in index for Java (look up)
 // To Do: Find out how to make sure the database doesn't lock on a search query
-// To Do: When the checkpoint is working and finished, delete menu options 7 and 8. They are just to check if the methodes from AutomakerService/Repository work. 
+// Updated: When the checkpoint is working and finished, delete menu options 7 and 8. They are just to check if the methodes from AutomakerService/Repository work. 
 // To Do: Make updated_on column, for the update (DateTime mySQL -> unix timestamp Java). Make the created_on for save (LocalDateTime)
 // Updated: All options from checkpoint 7 now work
 // Updated: Make sure the update does not duplicate al model types, make sure the Vehicle object gets the right Automaker_Id when updating
+
+add final to the String url
+rename the switch to the usage of the method
+object mapping (look up)
+Java optional 
+Stringbuilder instead of String formatting
+Remove e.printStackTrace
+Reformat all loggers to samen usage
+Constant type them out before the class (line 18 in Findby)
+Change insertquuey
+Remove date NewDate
 

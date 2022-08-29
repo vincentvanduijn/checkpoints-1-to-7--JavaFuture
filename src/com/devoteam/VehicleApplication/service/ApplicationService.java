@@ -26,8 +26,6 @@ public class ApplicationService {
         log.info("4. Update vehicle ");
         log.info("5. Delete vehicle");
         log.info("6. Show all vehicles in the database");
-        log.info("7. Search by name automaker");
-        log.info("8. Save by name automaker");
         log.info("0. Exit Program");
     }
 
@@ -54,7 +52,7 @@ public class ApplicationService {
     }
 
     public void switch3Logic() {
-        log.info(" \n Choose the name of the vehicle model you want to save in the database: ");
+        log.info(" \n Insert the information of the vehicle you want to save in the database: ");
         Automaker newAutomaker = checkingForAutomaker();
         log.info(" \n Choose model: ");
         String saveModel = input.next();
@@ -65,7 +63,15 @@ public class ApplicationService {
         log.info(" \n Choose the vehicle type: ");
         String saveVehicleType = input.next();
         Date saveDate = new Date();
-        Vehicle vehicleToSave = Vehicle.builder()
+        Vehicle vehicleToSave = buildVehicleToSave(newAutomaker, saveModel, saveColor, saveYear, saveVehicleType, saveDate);
+        vehicleToSave.setId(VehicleRepository.saveVehicle(vehicleToSave));
+        String formattedSavedModel = outputStringFormatter(String.valueOf(vehicleToSave));
+        log.info("\n" + formattedSavedModel + "\n");
+        log.info("Vehicle model was saved in the database");
+    }
+
+    private Vehicle buildVehicleToSave(Automaker newAutomaker, String saveModel, String saveColor, int saveYear, String saveVehicleType, Date saveDate) {
+        return Vehicle.builder()
                 .automaker(newAutomaker)
                 .model(saveModel)
                 .color(saveColor)
@@ -73,10 +79,6 @@ public class ApplicationService {
                 .vehicleType(VehicleTypeEnum.valueOf(saveVehicleType))
                 .createdOn(saveDate)
                 .build();
-        vehicleToSave.setId(VehicleRepository.saveVehicle(vehicleToSave));
-        String formattedSavedModel = outputStringFormatter(String.valueOf(vehicleToSave));
-        log.info("\n" + formattedSavedModel + "\n");
-        log.info("Vehicle model was saved in the database");
     }
 
     public void switch4Logic() {
@@ -112,19 +114,24 @@ public class ApplicationService {
             log.info(" \n Choose the vehicle type: ");
             String newVehicleType = input.next();
             Date newDate = new Date();
-            Vehicle vehicleToUpdate = Vehicle.builder().model(vehicle.getModel())
-                    .automaker(newAutomaker)
-                    .model(newModel)
-                    .color(newColor)
-                    .year(newYear)
-                    .vehicleType(VehicleTypeEnum.valueOf(newVehicleType))
-                    .createdOn(newDate)
-                    .id(vehicle.getId())
-                    .build();
+            Vehicle vehicleToUpdate = buildVehicleToUpdate(vehicle, newAutomaker, newModel, newColor, newYear, newVehicleType, newDate);
             VehicleRepository.replaceVehicle(vehicleToUpdate);
             String formattedUpdatedModel = outputStringFormatter(String.valueOf(vehicleToUpdate));
             log.info("\n" + formattedUpdatedModel + "\n");
         }
+    }
+
+    private Vehicle buildVehicleToUpdate(Vehicle vehicle, Automaker newAutomaker, String newModel, String newColor, int newYear, String newVehicleType, Date newDate) {
+        return Vehicle.builder()
+                .model(vehicle.getModel())
+                .automaker(newAutomaker)
+                .model(newModel)
+                .color(newColor)
+                .year(newYear)
+                .vehicleType(VehicleTypeEnum.valueOf(newVehicleType))
+                .createdOn(newDate)
+                .id(vehicle.getId())
+                .build();
     }
 
     public Automaker checkingForAutomaker() {
@@ -170,30 +177,6 @@ public class ApplicationService {
         List<Vehicle> allVehicles = VehicleRepository.findAllVehicles();
         String formattedAllVehicles = outputStringFormatter(String.valueOf(allVehicles));
         log.info("\n" + formattedAllVehicles + "\n");
-    }
-
-    public void switch7Logic() {
-        log.info(" \n Choose your automaker brand: ");
-        String automakerSelection = input.next();
-        List<Automaker> selectedAutomakers = AutomakerRepository.findByName(automakerSelection);
-        String formattedSelectedAutomakers = outputStringFormatter(String.valueOf(selectedAutomakers));
-        if (selectedAutomakers.isEmpty()) {
-            logger.log(Level.WARNING, "No automaker brands found with this name, please try again");
-        } else {
-            log.info("\n" + formattedSelectedAutomakers + "\n");
-        }
-    }
-
-    public void switch8Logic() {
-        log.info(" \n Choose the name of the automaker you want to save in the database: ");
-        String automakerToSave = input.next();
-        List<Automaker> selectedAutomaker = AutomakerRepository.findByName(automakerToSave);
-        if (selectedAutomaker.isEmpty()) {
-            AutomakerRepository.saveAutomaker(automakerToSave);
-            log.info("Automaker was saved in the database");
-        } else {
-            logger.log(Level.WARNING, "This is a duplicate automaker, please try again");
-        }
     }
 
     public String outputStringFormatter(String listFormatter) {

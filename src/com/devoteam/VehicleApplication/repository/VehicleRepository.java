@@ -1,6 +1,7 @@
 package com.devoteam.VehicleApplication.repository;
 
 import com.devoteam.VehicleApplication.conn.ConnectionFactory;
+import com.devoteam.VehicleApplication.domain.Automaker;
 import com.devoteam.VehicleApplication.domain.Vehicle;
 import com.devoteam.VehicleApplication.domain.VehicleTypeEnum;
 import lombok.extern.log4j.Log4j2;
@@ -32,7 +33,7 @@ public class VehicleRepository {
     }
 
     private static PreparedStatement createPreparedStatementFindByNameAutomaker(Connection conn, String name) throws SQLException {
-        String sql = "SELECT v.name, v.color, v.id, v.year, v.type, v.created_on " +
+        String sql = "SELECT v.name, v.color, v.id, v.year, v.type, v.created_on, a.id, a.name " +
                 "FROM vehicle AS v INNER JOIN automaker AS a ON v.automaker_id = a.id WHERE a.name = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, String.format("%s", name));
@@ -56,7 +57,8 @@ public class VehicleRepository {
     }
 
     private static PreparedStatement createPreparedStatementFindByNameModel(Connection conn, String name) throws SQLException {
-        String sql = "SELECT * FROM auto_dealer.vehicle WHERE vehicle.name = ?;";
+        String sql = "SELECT v.name, v.color, v.id, v.year, v.type, v.created_on, a.id, a.name " +
+                "FROM vehicle AS v INNER JOIN automaker AS a ON v.automaker_id = a.id WHERE v.name = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1, String.format("%s", name));
         return ps;
@@ -78,7 +80,8 @@ public class VehicleRepository {
     }
 
     private static PreparedStatement createPreparedStatementFindAll(Connection conn) throws SQLException {
-        String sql = "SELECT * FROM auto_dealer.vehicle;";
+        String sql = "SELECT v.name, v.color, v.id, v.year, v.type, v.created_on, a.id, a.name " +
+                "FROM vehicle AS v INNER JOIN automaker AS a ON v.automaker_id = a.id;";
         return conn.prepareStatement(sql);
     }
 
@@ -157,10 +160,15 @@ public class VehicleRepository {
     }
 
     private static void vehicleBuilder(List<Vehicle> vehicles, ResultSet rs) throws SQLException {
+        Automaker automaker = Automaker.builder()
+                .id(rs.getInt("a.id"))
+                .name(rs.getString("a.name"))
+                .build();
         Vehicle vehicle = Vehicle
                 .builder()
                 .id(rs.getInt("id"))
                 .model(rs.getString("name"))
+                .automaker(automaker)
                 .color(rs.getString("color"))
                 .year(rs.getInt("year"))
                 .createdOn(rs.getDate("created_on"))

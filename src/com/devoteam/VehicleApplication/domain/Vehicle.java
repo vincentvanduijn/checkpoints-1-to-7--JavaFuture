@@ -22,6 +22,7 @@ public class Vehicle implements VehicleInterface {
         return  "\n#------------------------------------------------#\n" +
                 "Model: " + model + "\n" +
                 "Id Vehicle: " + id + '\n' +
+                automaker + '\n' +
                 "Vehicle type: " + vehicleType + "\n" +
                 "Color: " + color + "\n" +
                 "Year: " + year + "\n" +
